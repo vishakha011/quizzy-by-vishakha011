@@ -21,6 +21,7 @@ coverage
 # Ignore node packages
 node_modules
 
+
 # rails specific ignores
 storage/
 vendor/
