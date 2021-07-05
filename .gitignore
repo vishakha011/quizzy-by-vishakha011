@@ -28,6 +28,8 @@ test/reports
 /public/packs
 /public/assets
 /public/packs-test
+test/fixtures
+test/reports
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
