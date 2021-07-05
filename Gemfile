@@ -23,6 +23,9 @@ gem 'jbuilder', '~> 2.7'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
+gem 'rexml', '~> 3.2', '>= 3.2.4'
+
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -47,6 +50,8 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
+  # Complete suite of testing facilities
+  gem 'minitest', '~> 5.8', '>= 5.8.4'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
