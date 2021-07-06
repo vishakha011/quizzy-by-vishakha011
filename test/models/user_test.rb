@@ -3,7 +3,7 @@ require "test_helper"
 
 class UserTest < ActiveSupport::TestCase
   def setup
-    @user = User.new(first_name: "Sam", last_name: "Smith", email: "sam@example.com")
+    @user = User.new(first_name: "Sam", last_name: "Smith", email: "sam@example.com", role: 0, password: "welcome", password_confirmation: "welcome")
   end
 
   def test_user_should_be_valid
@@ -81,4 +81,36 @@ class UserTest < ActiveSupport::TestCase
       assert @user.invalid?
     end
   end
+
+  def test_user_should_have_valild_role
+    @user.role = 1
+    assert @user.valid?
+  end
+
+  def test_user_should_not_be_saved_without_password
+    @user.password = nil
+    assert_not @user.save
+    assert_equal ["Password can't be blank"],
+                  @user.errors.full_messages
+  end
+  
+  def test_user_should_not_be_saved_without_password_confirmation
+    @user.password_confirmation = nil
+    assert_not @user.save
+    assert_equal ["Password confirmation can't be blank"],
+                  @user.errors.full_messages
+  end
+
+  def test_user_should_not_be_saved_without_password_matching_confirm_password
+    @user.password = "123456"
+    assert_not @user.save
+    assert_equal ["Password confirmation doesn't match Password", "Password confirmation doesn't match Password"], @user.errors.full_messages
+  end
+
+  def test_user_should_not_be_saved_without_valid_password_length
+    @user.password = "123"
+    assert_not @user.save
+    assert_equal ["Password confirmation doesn't match Password", "Password confirmation doesn't match Password", "Password is too short (minimum is 6 characters)"], @user.errors.full_messages
+  end
+
 end
