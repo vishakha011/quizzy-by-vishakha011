@@ -26,6 +26,9 @@ gem 'bootsnap', '>= 1.4.4', require: false
 # allows to get hash of the password in a secure manner
 gem 'bcrypt', '~> 3.1.13'
 
+# bring React to our Ruby on Rails application
+gem 'react-rails'
+
 gem 'rexml', '~> 3.2', '>= 3.2.4'
 
 
