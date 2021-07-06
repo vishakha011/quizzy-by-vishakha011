@@ -23,6 +23,9 @@ gem 'jbuilder', '~> 2.7'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
+# allows to get hash of the password in a secure manner
+gem 'bcrypt', '~> 3.1.13'
+
 gem 'rexml', '~> 3.2', '>= 3.2.4'
 
 
