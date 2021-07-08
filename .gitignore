@@ -100,4 +100,5 @@ yarn-debug.log*
 .yarn-integrity
 .yarnrc
 yarn-1.22.5.cjs
-yarn-1.22.5.jstest/fixtures
+yarn-1.22.5.js
+test/fixtures
