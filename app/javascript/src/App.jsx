@@ -36,7 +36,7 @@ const App = () => {
     setAuthHeaders(setLoading);
   }, []);
 
-  if (loading) {
+  if (loading || isLoggedIn == null) {
     return (
       <div className="h-screen">
         <PageLoader />
