@@ -9,8 +9,9 @@ end
 
 def create_sample_data!
   puts 'Seeding with sample data...'
-  create_user! email: 'sam@example.com', first_name: 'Sam', last_name: 'Smith', role: 1
-  puts 'Done! Now you can login using email "sam@example.com" password "welcome"'
+  create_user! email: 'oliver@example.com', first_name: 'Oliver', last_name: 'Smith', role: 1
+  create_user! email: 'sam@example.com', first_name: 'Sam', last_name: 'Smith', role: 0
+  puts 'Done! Now you can login with either "oliver@example.com" or "sam@example.com", using password "welcome"'
 end
 
 def create_user!(options = {})
