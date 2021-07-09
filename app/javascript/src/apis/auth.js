@@ -5,12 +5,12 @@ const login = payload =>
 
 const isLoggedIn = () => axios.get("/sessions", { withCredentials: true });
 
-const logout = () => axios.delete("/sessions", { withCredentials: true });
+// const logout = () => axios.delete("/sessions", { withCredentials: true });
 
 const authApi = {
   login,
   isLoggedIn,
-  logout,
+  // logout,
 };
 
 export default authApi;

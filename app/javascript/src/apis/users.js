@@ -1,9 +1,9 @@
-import axios from "axios";
+// import axios from "axios";
 
-const list = () => axios.get("/users");
+// const list = () => axios.get("/users");
 
-const usersApi = {
-  list,
-};
+// const usersApi = {
+//   list,
+// };
 
-export default usersApi;
+// export default usersApi;
