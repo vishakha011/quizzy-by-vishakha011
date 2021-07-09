@@ -1,11 +1,63 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { isNil, isEmpty, either } from "ramda";
 
-const Dashboard = () => {
+import Container from "components/Container";
+import ListQuiz from "components/Quiz/ListQuiz";
+import PageLoader from "components/PageLoader";
+import Button from "components/Button";
+import quizApi from "apis/quiz";
+
+const Dashboard = ({ history }) => {
+  const [quizzes, setQuizzes] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const fetchQuiz = async () => {
+    try {
+      const response = await quizApi.list();
+      setQuizzes(response.data.quizzes);
+      logger.info(response.data.quizzes);
+      setLoading(false);
+    } catch (error) {
+      logger.error(error);
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchQuiz();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="w-screen h-screen">
+        <PageLoader />
+      </div>
+    );
+  }
+
+  if (!either(isNil, isEmpty)(quizzes)) {
+    return (
+      <Container>
+        <div className="flex justify-between items-center max-w-5xl mx-auto py-8">
+          <div className="mt-6">
+            <h1 className="font-bold">List of Quizzes</h1>
+          </div>
+          <Button buttonText="Add new Quiz" />
+        </div>
+        <ListQuiz data={quizzes} />
+      </Container>
+    );
+  }
+
   return (
-    <div className="text-center py-8">
-      <h1>WELCOME</h1>
-      <p>Login Successful.</p>
-    </div>
+    <Container>
+      <div className="flex justify-end items-center max-w-5xl mx-auto py-8 flex-row">
+        <Button buttonText="Add new Quiz" />
+      </div>
+      <h1 className="text-xl leading-5 text-center">
+        You have not created any quiz 😔
+      </h1>
+    </Container>
   );
 };
 
