@@ -31,3 +31,4 @@
 
 en:
   hello: "Hello world"
+  successfully_created: "Quiz was successfully created!"

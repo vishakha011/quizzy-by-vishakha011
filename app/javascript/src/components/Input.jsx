@@ -13,8 +13,8 @@ const Input = ({
     <div className="mt-6">
       {label && (
         <label
-          className="block text-sm font-medium
-              leading-5 text-bb-gray-700"
+          className="block text-xl font-medium
+              leading-5 text-bb-gray-700 mb-4"
         >
           {label}
         </label>
