@@ -42,7 +42,13 @@ const Dashboard = ({ history }) => {
           <div className="mt-6">
             <h1 className="font-bold">List of Quizzes</h1>
           </div>
-          <Button buttonText="Add new Quiz" />
+          <Button
+            type="link"
+            buttonText="Add new Quiz"
+            path={"/quiz/create"}
+            iconClass="ri-add-line"
+            loading={loading}
+          />
         </div>
         <ListQuiz data={quizzes} />
       </Container>
@@ -52,7 +58,13 @@ const Dashboard = ({ history }) => {
   return (
     <Container>
       <div className="flex justify-end items-center max-w-5xl mx-auto py-8 flex-row">
-        <Button buttonText="Add new Quiz" />
+        <Button
+          type="link"
+          buttonText="Add new Quiz"
+          path={"/quiz/create"}
+          iconClass="ri-add-line"
+          loading={loading}
+        />
       </div>
       <h1 className="text-xl leading-5 text-center">
         You have not created any quiz 😔

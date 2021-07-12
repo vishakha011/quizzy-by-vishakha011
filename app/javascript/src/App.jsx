@@ -9,6 +9,7 @@ import PrivateRoute from "components/Common/PrivateRoute";
 import Login from "components/Authentication/Login";
 import PageLoader from "components/PageLoader";
 import Dashboard from "components/Dashboard";
+import CreateQuiz from "components/Quiz/CreateQuiz";
 import authApi from "apis/auth";
 
 const App = () => {
@@ -30,7 +31,7 @@ const App = () => {
 
   useEffect(() => {
     initializeLogger();
-    // logger.info("Js-Logger from App.jsx!!!.");
+    logger.info("Js-Logger from App.jsx.");
     registerIntercepts();
     checkLoginStatus();
     setAuthHeaders(setLoading);
@@ -50,6 +51,7 @@ const App = () => {
       <NavBar isLoggedIn={isLoggedIn} user={user} />
       <Switch>
         <Route exact path="/login" component={Login} />
+        <Route exact path="/quiz/create" component={CreateQuiz} />
         <PrivateRoute
           path="/"
           redirectRoute="/login"
