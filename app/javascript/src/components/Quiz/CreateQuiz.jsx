@@ -12,6 +12,7 @@ const CreateQuiz = ({ history }) => {
     try {
       await quizApi.create({ quiz: { name } });
       setLoading(false);
+      history.push("/");
     } catch (error) {
       logger.error(error);
       setLoading(false);
