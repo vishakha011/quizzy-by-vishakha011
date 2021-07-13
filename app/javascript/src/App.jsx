@@ -10,6 +10,7 @@ import Login from "components/Authentication/Login";
 import PageLoader from "components/PageLoader";
 import Dashboard from "components/Dashboard";
 import CreateQuiz from "components/Quiz/CreateQuiz";
+import EditQuiz from "components/Quiz/EditQuiz";
 import authApi from "apis/auth";
 
 const App = () => {
@@ -52,6 +53,7 @@ const App = () => {
       <Switch>
         <Route exact path="/login" component={Login} />
         <Route exact path="/quiz/create" component={CreateQuiz} />
+        <Route exact path="/quiz/:id/edit" component={EditQuiz} />
         <PrivateRoute
           path="/"
           redirectRoute="/login"

@@ -15,7 +15,7 @@ const Dashboard = ({ history }) => {
     try {
       const response = await quizApi.list();
       setQuizzes(response.data.quizzes);
-      logger.info(response.data.quizzes);
+      // logger.info(response.data.quizzes);
       setLoading(false);
     } catch (error) {
       logger.error(error);
@@ -26,6 +26,10 @@ const Dashboard = ({ history }) => {
   useEffect(() => {
     fetchQuiz();
   }, []);
+
+  const updateQuiz = id => {
+    history.push(`/quiz/${id}/edit`);
+  };
 
   if (loading) {
     return (
@@ -50,7 +54,7 @@ const Dashboard = ({ history }) => {
             loading={loading}
           />
         </div>
-        <ListQuiz data={quizzes} />
+        <ListQuiz data={quizzes} updateQuiz={updateQuiz} />
       </Container>
     );
   }
