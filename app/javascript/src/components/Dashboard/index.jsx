@@ -5,17 +5,19 @@ import Container from "components/Container";
 import ListQuiz from "components/Quiz/ListQuiz";
 import PageLoader from "components/PageLoader";
 import Button from "components/Button";
+import Modal from "components/Common/Modal";
 import quizApi from "apis/quiz";
 
 const Dashboard = ({ history }) => {
   const [quizzes, setQuizzes] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [openModal, setOpenModal] = useState(false);
+  const [id, setId] = useState(null);
 
   const fetchQuiz = async () => {
     try {
       const response = await quizApi.list();
       setQuizzes(response.data.quizzes);
-      logger.info(response.data.quizzes);
       setLoading(false);
     } catch (error) {
       logger.error(error);
@@ -26,6 +28,22 @@ const Dashboard = ({ history }) => {
   useEffect(() => {
     fetchQuiz();
   }, []);
+
+  const updateQuiz = id => {
+    history.push(`/quiz/${id}/edit`);
+  };
+
+  const destroyQuiz = async id => {
+    try {
+      await quizApi.destroy(id);
+      setOpenModal(false);
+      setId(null);
+      await fetchQuiz();
+    } catch (error) {
+      logger.error(error);
+      setLoading(false);
+    }
+  };
 
   if (loading) {
     return (
@@ -40,7 +58,7 @@ const Dashboard = ({ history }) => {
       <Container>
         <div className="flex justify-between items-center max-w-5xl mx-auto py-8">
           <div className="mt-6">
-            <h1 className="font-bold">List of Quizzes</h1>
+            <h1 className="font-bold text-xl px-2">List of Quizzes</h1>
           </div>
           <Button
             type="link"
@@ -50,7 +68,19 @@ const Dashboard = ({ history }) => {
             loading={loading}
           />
         </div>
-        <ListQuiz data={quizzes} />
+        <ListQuiz
+          data={quizzes}
+          updateQuiz={updateQuiz}
+          setOpenModal={setOpenModal}
+          setId={setId}
+        />
+        {openModal && (
+          <Modal
+            setOpenModal={setOpenModal}
+            destroyQuiz={destroyQuiz}
+            id={id}
+          />
+        )}
       </Container>
     );
   }
