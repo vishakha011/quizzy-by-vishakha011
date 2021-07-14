@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { isNil, isEmpty, either, find } from "ramda";
+import { isNil, isEmpty, either } from "ramda";
 
 import Container from "components/Container";
 import ListQuiz from "components/Quiz/ListQuiz";
