@@ -7,6 +7,8 @@ const TableRow = ({
   rows,
   prepareRow,
   updateQuiz,
+  setOpenModal,
+  setId,
 }) => {
   return (
     <tbody
@@ -43,7 +45,15 @@ const TableRow = ({
                     </td>
 
                     <td className="px-6 py-4 text-sm font-medium leading-5 text-right cursor-pointer">
-                      <a className=" hover:text-bb-red">Delete</a>
+                      <a
+                        className=" hover:text-bb-red"
+                        onClick={() => {
+                          setOpenModal(true);
+                          setId(row.original.id);
+                        }}
+                      >
+                        Delete
+                      </a>
                     </td>
                   </Fragment>
                 </>
