@@ -7,8 +7,8 @@ class QuizController < ApplicationController
   end
 
   def create
-    quiz = Quiz.new(quiz_params);
-    if quiz.save
+    @quiz = Quiz.new(quiz_params);
+    if @quiz.save
       render status: :ok, json: {notice: t('successfully_created') }
     else
       errors = @quiz.errors.full_messages
@@ -40,7 +40,7 @@ class QuizController < ApplicationController
 
   private
   def quiz_params
-    params.require(:quiz).permit(:name)
+    params.require(:quiz).permit(:name).merge(user_id: @current_user.id)
   end
 
   def load_quiz

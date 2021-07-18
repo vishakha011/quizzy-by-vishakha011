@@ -32,7 +32,7 @@ const App = () => {
 
   useEffect(() => {
     initializeLogger();
-    logger.info("Js-Logger from App.jsx.");
+    // logger.info("Js-Logger from App.jsx.");
     registerIntercepts();
     checkLoginStatus();
     setAuthHeaders(setLoading);
