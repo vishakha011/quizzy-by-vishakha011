@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
- include CurrentUserConcern
+  skip_before_action :check_current_user, only: [:create, :show]
 
   def create
     user = User.find_by(email: login_params[:email].downcase)
