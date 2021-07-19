@@ -11,6 +11,7 @@ import PageLoader from "components/PageLoader";
 import Dashboard from "components/Dashboard";
 import CreateQuiz from "components/Quiz/CreateQuiz";
 import EditQuiz from "components/Quiz/EditQuiz";
+import ShowQuiz from "components/Quiz/ShowQuiz";
 import authApi from "apis/auth";
 
 const App = () => {
@@ -32,7 +33,7 @@ const App = () => {
 
   useEffect(() => {
     initializeLogger();
-    // logger.info("Js-Logger from App.jsx.");
+    logger.info("Js-Logger from App.jsx.");
     registerIntercepts();
     checkLoginStatus();
     setAuthHeaders(setLoading);
@@ -54,6 +55,7 @@ const App = () => {
         <Route exact path="/login" component={Login} />
         <Route exact path="/quiz/create" component={CreateQuiz} />
         <Route exact path="/quiz/:id/edit" component={EditQuiz} />
+        <Route exact path="/quiz/:id/show" component={ShowQuiz} />
         <PrivateRoute
           path="/"
           redirectRoute="/login"

@@ -6,6 +6,7 @@ const TableRow = ({
   getTableBodyProps,
   rows,
   prepareRow,
+  showQuiz,
   updateQuiz,
   setOpenModal,
   setId,
@@ -29,7 +30,8 @@ const TableRow = ({
                   <Fragment key={idx}>
                     <td
                       {...cell.getCellProps()}
-                      className="px-6 py-4 text-sm font-medium leading-5 text-bb-gray whitespace-no-wrap"
+                      className="px-6 py-4 text-sm font-medium leading-5 text-bb-gray whitespace-no-wrap cursor-pointer"
+                      onClick={() => showQuiz(row.original.id)}
                     >
                       {cell.render("Cell")}
                     </td>

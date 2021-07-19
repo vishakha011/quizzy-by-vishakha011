@@ -29,6 +29,10 @@ const Dashboard = ({ history }) => {
     fetchQuiz();
   }, []);
 
+  const showQuiz = id => {
+    history.push(`quiz/${id}/show`);
+  };
+
   const updateQuiz = id => {
     history.push(`/quiz/${id}/edit`);
   };
@@ -70,6 +74,7 @@ const Dashboard = ({ history }) => {
         </div>
         <ListQuiz
           data={quizzes}
+          showQuiz={showQuiz}
           updateQuiz={updateQuiz}
           setOpenModal={setOpenModal}
           setId={setId}
