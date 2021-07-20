@@ -1,4 +1,6 @@
 class QuestionsController < ApplicationController
+  before_action :load_question, only: [:show, :update, :destroy]
+
   def index
     questions = Question.all
     render status: :ok, json: { questions: questions.as_json(include: {
@@ -19,10 +21,41 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def show
+    render status: :ok, json: { question: @question.as_json(include: {
+      answers: {
+        only: [:answer, :id]
+      }
+    })}
+  end
+
+  def update
+    if @question.update(question_params)
+      render status: :ok, json: { notice: 'Successfully updated question' }
+    else
+      errors = @question.errors.full_messages.to_sentence
+      render status: :unprocessable_entity, json: { errors: errors}
+    end
+  end
+
+  def destroy
+    if @question.destroy
+      render status: :ok, json: { notice: 'Successfully deleted question'}
+    else
+      errors = @question.errors.full_messages.to_sentence
+      render status: :unprocessable_entity, json: { errors: errors}
+    end
+  end
+
   private
 
     def question_params
-      params.require(:question).permit(:question, :correct_answer, :quiz_id, :answers_attributes => [:id, :answer])
+      params.require(:question).permit(:question, :correct_answer, :quiz_id, :answers_attributes => [:id, :answer, :_destroy])
     end
 
+    def load_question
+      @question = Question.find(params[:id])
+    rescue ActiveRecord::RecordNotFound => e
+      render json: { errors: e }, status: :not_found
+  end
 end

@@ -17,7 +17,13 @@ class QuizController < ApplicationController
   end
 
   def show
-    render status: :ok, json: { quiz: @quiz }
+    @questions = Question.where(quiz_id: @quiz.id).map do |question|
+      {
+        question: question,
+        answers: question.answers
+      }
+    end 
+    render status: :ok, json: { quiz: @quiz, questions: @questions.as_json }
   end
 
   def update

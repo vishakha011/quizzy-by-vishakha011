@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 const Button = ({
   type = "button",
   buttonText,
+  buttonColor = "indigo",
   onClick,
   iconClass,
   path = "",
@@ -16,7 +17,7 @@ const Button = ({
         <div className="mt-6">
           <Link
             to={path}
-            className="flex justify-center px-4 py-2 text-sm font-medium leading-5 text-white transition duration-300 ease-in-out border border-transparent rounded-md group hover:bg-opacity-90 focus:outline-none bg-indigo-500"
+            className={`flex justify-center px-4 py-2 text-sm font-medium leading-5 text-white transition duration-300 ease-in-out border border-transparent rounded-md group hover:bg-opacity-90 focus:outline-none bg-${buttonColor}-500`}
           >
             {iconClass ? <i className={`${iconClass} text-xl pr-1`}></i> : " "}
             {buttonText}
@@ -31,11 +32,9 @@ const Button = ({
       <button
         type={type}
         onClick={onClick}
-        className="relative flex justify-center w-50 m-auto px-4 py-2
-          text-sm font-medium leading-5 text-white transition duration-150
-          ease-in-out bg-bb-purple border border-transparent rounded-md
-          group hover:bg-opacity-90 focus:outline-none"
+        className={`flex justify-center px-4 py-2 text-sm font-medium leading-5 text-white transition duration-300 ease-in-out border border-transparent rounded-md group hover:bg-opacity-90 focus:outline-none bg-${buttonColor}-500`}
       >
+        {iconClass ? <i className={`${iconClass} text-xl pr-1`}></i> : " "}
         {loading ? "Loading..." : buttonText}
       </button>
     </div>

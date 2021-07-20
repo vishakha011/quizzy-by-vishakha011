@@ -32,8 +32,9 @@ const CreateQuestion = ({ history }) => {
         },
       });
       setLoading(false);
+      history.push(`/quiz/${id}/show`);
     } catch (error) {
-      Logger.error(error);
+      logger.error(error);
       setLoading(false);
     }
   };

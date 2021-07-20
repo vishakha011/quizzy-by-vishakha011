@@ -11,6 +11,7 @@ const QuestionForm = ({
   options,
   setOptions,
   loading,
+  defaultValue = 0,
   handleSubmit,
 }) => {
   const handleSetOptions = (event, index) => {
@@ -30,8 +31,8 @@ const QuestionForm = ({
   );
 
   const defaultOption = {
-    value: 0,
-    label: "Option 1",
+    value: defaultValue,
+    label: `Option ${defaultValue + 1}`,
   };
 
   return (
