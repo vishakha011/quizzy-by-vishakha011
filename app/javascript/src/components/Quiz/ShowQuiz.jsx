@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
-import { isNil, isEmpty, either } from "ramda";
 
 import Container from "components/Container";
+import PrimaryContainer from "components/PrimaryContainer";
 import PageLoader from "components/PageLoader";
 import Button from "components/Button";
 import quizApi from "apis/quiz";
@@ -48,13 +48,10 @@ const ShowQuiz = () => {
         />
       </div>
 
-      {either(isNil, isEmpty)(questions) ? (
-        <h1 className="text-xl leading-5 text-center">
-          There are no questions in this quiz😔
-        </h1>
-      ) : (
-        ""
-      )}
+      <PrimaryContainer
+        heading="There are no questions in this quiz"
+        data={questions}
+      />
     </Container>
   );
 };

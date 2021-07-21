@@ -7,7 +7,7 @@ const TableRow = ({
   rows,
   prepareRow,
   showQuiz,
-  updateQuiz,
+  editQuiz,
   setOpenModal,
   setId,
 }) => {
@@ -40,7 +40,7 @@ const TableRow = ({
                       <a
                         className="text-bb-purple text-opacity-50
                         hover:text-opacity-100"
-                        onClick={() => updateQuiz(row.original.id)}
+                        onClick={() => editQuiz(row.original.id)}
                       >
                         Edit
                       </a>

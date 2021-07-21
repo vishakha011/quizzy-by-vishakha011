@@ -4,7 +4,7 @@ import { useTable } from "react-table";
 import TableHeader from "./TableHeader";
 import TableRow from "./TableRow";
 
-const Table = ({ data, showQuiz, updateQuiz, setOpenModal, setId }) => {
+const Table = ({ data, showQuiz, editQuiz, setOpenModal, setId }) => {
   const COLUMNS = [
     {
       Header: "Quiz Name",
@@ -38,7 +38,7 @@ const Table = ({ data, showQuiz, updateQuiz, setOpenModal, setId }) => {
                 rows={rows}
                 prepareRow={prepareRow}
                 showQuiz={showQuiz}
-                updateQuiz={updateQuiz}
+                editQuiz={editQuiz}
                 setOpenModal={setOpenModal}
                 setId={setId}
               />
