@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { isNil, isEmpty, either } from "ramda";
 
 import Container from "components/Container";
+import PrimaryContainer from "components/PrimaryContainer";
 import ListQuiz from "components/Quiz/ListQuiz";
 import PageLoader from "components/PageLoader";
 import Button from "components/Button";
@@ -33,7 +34,7 @@ const Dashboard = ({ history }) => {
     history.push(`quiz/${id}/show`);
   };
 
-  const updateQuiz = id => {
+  const editQuiz = id => {
     history.push(`/quiz/${id}/edit`);
   };
 
@@ -75,7 +76,7 @@ const Dashboard = ({ history }) => {
         <ListQuiz
           data={quizzes}
           showQuiz={showQuiz}
-          updateQuiz={updateQuiz}
+          editQuiz={editQuiz}
           setOpenModal={setOpenModal}
           setId={setId}
         />
@@ -101,9 +102,10 @@ const Dashboard = ({ history }) => {
           loading={loading}
         />
       </div>
-      <h1 className="text-xl leading-5 text-center">
-        You have not created any quiz 😔
-      </h1>
+      <PrimaryContainer
+        heading="You have not created any quiz"
+        data={quizzes}
+      />
     </Container>
   );
 };
