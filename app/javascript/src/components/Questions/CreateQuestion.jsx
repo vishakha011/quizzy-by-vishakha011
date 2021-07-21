@@ -8,8 +8,8 @@ import questionsApi from "apis/questions";
 const CreateQuestion = ({ history }) => {
   const [question, setQuestion] = useState("");
   const [options, setOptions] = useState([
-    { answer: "", deleteOption: false },
-    { answer: "", deleteOption: false },
+    { option: "", deleteOption: false },
+    { option: "", deleteOption: false },
   ]);
   const [correctAnswer, setCorrectAnswer] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -19,16 +19,16 @@ const CreateQuestion = ({ history }) => {
     event.preventDefault();
     try {
       setLoading(true);
-      let answersAttributes = [];
+      let optionsAttributes = [];
       options.map(option =>
-        answersAttributes.push({ answer: option.answer })
+        optionsAttributes.push({ option: option.option })
       );
       await questionsApi.create({
         question: {
           question,
           correct_answer: correctAnswer,
           quiz_id: id,
-          answers_attributes: answersAttributes,
+          options_attributes: optionsAttributes,
         },
       });
       setLoading(false);

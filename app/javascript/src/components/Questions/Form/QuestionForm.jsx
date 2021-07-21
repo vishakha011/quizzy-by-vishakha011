@@ -17,8 +17,7 @@ const QuestionForm = ({
   const handleSetOptions = (event, index) => {
     event.preventDefault();
     const data = [...options];
-    data[index].answer = event.target.value;
-
+    data[index].option = event.target.value;
     setOptions(data);
   };
 
@@ -46,7 +45,7 @@ const QuestionForm = ({
         <>
           <Input
             label={`Option ${index + 1}`}
-            value={option.answer}
+            value={option.option}
             deleteOption={option.deleteOption}
             onChange={e => handleSetOptions(e, index)}
             setOptions={setOptions}
@@ -63,7 +62,7 @@ const QuestionForm = ({
               onClick={() =>
                 setOptions(prevState => [
                   ...prevState,
-                  { answer: "", deleteOption: true },
+                  { option: "", deleteOption: true },
                 ])
               }
             >
@@ -81,7 +80,7 @@ const QuestionForm = ({
           <Select
             options={selectCorrectAnswer}
             defaultValue={defaultOption}
-            onChange={e => setCorrectAnswer(options[e.value].answer)}
+            onChange={e => setCorrectAnswer(options[e.value].option)}
             isSearchable
           />
         </div>

@@ -20,7 +20,7 @@ class QuizController < ApplicationController
     @questions = Question.where(quiz_id: @quiz.id).map do |question|
       {
         question: question,
-        answers: question.answers
+        options: question.options
       }
     end 
     render status: :ok, json: { quiz: @quiz, questions: @questions.as_json }

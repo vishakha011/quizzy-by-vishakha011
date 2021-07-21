@@ -4,16 +4,16 @@ class QuestionsController < ApplicationController
   def index
     questions = Question.all
     render status: :ok, json: { questions: questions.as_json(include: {
-      answers: {
-        only: [:answer, :id]
+      options: {
+        only: [:option, :id]
       }
     }) 
   }
   end
 
   def create
-    @question = Question.create(question_params)
-    if @question
+    @question = Question.new(question_params)
+    if @question.save
       render status: :ok, json: { notice: "Successfully created question" }
     else
       errors = @question.errors.full_messages.to_sentence
@@ -50,7 +50,7 @@ class QuestionsController < ApplicationController
   private
 
     def question_params
-      params.require(:question).permit(:question, :correct_answer, :quiz_id, :answers_attributes => [:id, :answer, :_destroy])
+      params.require(:question).permit(:question, :correct_answer, :quiz_id, :options_attributes => [:id, :option])
     end
 
     def load_question

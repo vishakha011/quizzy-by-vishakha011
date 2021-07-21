@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
-import { isNil, isEmpty, either } from "ramda";
 
 import Container from "components/Container";
+import PrimaryContainer from "components/PrimaryContainer";
 import PageLoader from "components/PageLoader";
 import Button from "components/Button";
 import ListQuestions from "components/Questions/ListQuestions";
@@ -83,6 +83,10 @@ const ShowQuiz = () => {
           />
         ))
       )}
+      {/* <PrimaryContainer
+        heading="There are no questions in this quiz"
+        data={questions}
+      /> */}
     </Container>
   );
 };
