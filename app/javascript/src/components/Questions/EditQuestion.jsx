@@ -21,7 +21,6 @@ const EditQuestion = ({ history }) => {
       const response = await questionsApi.show(id);
       const { question, options, correct_answer, quiz_id } =
         response.data.question;
-      logger.info(response);
       setQuestion(question);
       setCorrectAnswer(correct_answer);
       setQuizId(quiz_id);
