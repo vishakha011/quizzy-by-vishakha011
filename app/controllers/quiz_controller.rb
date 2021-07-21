@@ -46,7 +46,7 @@ class QuizController < ApplicationController
 
   private
   def quiz_params
-    params.require(:quiz).permit(:name).merge(user_id: @current_user.id)
+    params.require(:quiz).permit(:name, :is_published).merge(user_id: @current_user.id)
   end
 
   def load_quiz

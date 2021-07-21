@@ -14,6 +14,7 @@ const ShowQuiz = () => {
   const [quiz, setQuiz] = useState({});
   const [name, setName] = useState([]);
   const [questions, setQuestions] = useState([]);
+  const [publish, setPublish] = useState(true);
   const [loading, setLoading] = useState(true);
   const [pageLoading, setPageLoading] = useState(true);
 
@@ -25,6 +26,18 @@ const ShowQuiz = () => {
       logger.error(error);
     } finally {
       setPageLoading(false);
+    }
+  };
+
+  const handlePublish = async e => {
+    try {
+      await quizApi.update(id, {
+        quiz: { name: quiz.name, is_published: publish },
+      });
+      setPageLoading(true);
+      fetchQuizDetails();
+    } catch (error) {
+      logger.error(error);
     }
   };
 
@@ -63,11 +76,25 @@ const ShowQuiz = () => {
             iconClass="ri-add-line"
             loading={loading}
           />
-          {!either(isNil, isEmpty)(questions) && (
-            <Button buttonText="Publish" />
+          {!either(isNil, isEmpty)(questions) && !quiz.is_published && (
+            <Button buttonText="Publish" onClick={handlePublish} />
           )}
         </div>
       </div>
+      {quiz.is_published && (
+        <div className="mt-4 font-semibold flex items-center">
+          <i className="ri-checkbox-circle-fill px-1"></i>
+          <span className="pr-1">Published, your public link is -</span>
+          <a
+            href={`${window.location.origin}/public/${quiz.slug}`}
+            className="text-indigo-500"
+            target="_blank"
+            rel="noreferrer"
+          >
+            {window.location.origin}/public/{quiz.slug}
+          </a>
+        </div>
+      )}
 
       <PrimaryContainer
         heading="There are no questions in this quiz"
