@@ -2,8 +2,8 @@ class QuestionsController < ApplicationController
   def index
     questions = Question.all
     render status: :ok, json: { questions: questions.as_json(include: {
-      answers: {
-        only: [:answer, :id]
+      options: {
+        only: [:option, :id]
       }
     }) 
   }
@@ -22,7 +22,7 @@ class QuestionsController < ApplicationController
   private
 
     def question_params
-      params.require(:question).permit(:question, :correct_answer, :quiz_id, :answers_attributes => [:id, :answer])
+      params.require(:question).permit(:question, :correct_answer, :quiz_id, :options_attributes => [:id, :option])
     end
 
 end
