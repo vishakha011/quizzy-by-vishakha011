@@ -10,8 +10,8 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    @question = Question.create(question_params)
-    if @question
+    @question = Question.new(question_params)
+    if @question.save
       render status: :ok, json: { notice: "Successfully created question" }
     else
       errors = @question.errors.full_messages.to_sentence
