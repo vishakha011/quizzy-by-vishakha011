@@ -9,7 +9,7 @@ import questionsApi from "apis/questions";
 const EditQuestion = ({ history }) => {
   const { id } = useParams();
   const [question, setQuestion] = useState("");
-  const [options, setOptions] = useState([]);
+  const [fields, setFields] = useState([]);
   const [correctAnswer, setCorrectAnswer] = useState("");
   const [loading, setLoading] = useState(false);
   const [pageLoading, setPageLoading] = useState(true);
@@ -19,22 +19,22 @@ const EditQuestion = ({ history }) => {
   const fetchQuestionDetails = async () => {
     try {
       const response = await questionsApi.show(id);
-      const { question, answers, correct_answer, quiz_id } =
+      const { question, options, correct_answer, quiz_id } =
         response.data.question;
       logger.info(response);
       setQuestion(question);
       setCorrectAnswer(correct_answer);
       setQuizId(quiz_id);
-      setOptions(() => {
-        answers.map((obj, idx) => {
+      setFields(() => {
+        options.map((obj, idx) => {
           if (idx >= 2) obj["deleteOption"] = true;
         });
-        return answers;
+        return options;
       });
       setDefaultValue(() => {
         let indexOfCorrectAnswer;
-        answers.map((obj, idx) => {
-          if (obj.answer == correct_answer) indexOfCorrectAnswer = idx;
+        options.map((obj, idx) => {
+          if (obj.option == correct_answer) indexOfCorrectAnswer = idx;
         });
         return indexOfCorrectAnswer;
       });
@@ -50,33 +50,33 @@ const EditQuestion = ({ history }) => {
       event.preventDefault();
       setLoading(true);
       const response = await questionsApi.show(id);
-      const { answers } = response.data.question;
+      const { options } = response.data.question;
 
-      let answersAttributes = [];
+      let optionsAttributes = [];
 
-      answers.map((obj, idx) => {
-        if (options[idx] && options[idx].id == obj.id)
-          answersAttributes.push({ id: obj.id, answer: options[idx].answer });
-        else answersAttributes.push({ ...obj, _destroy: obj.id });
+      options.map((obj, idx) => {
+        if (fields[idx] && fields[idx].id == obj.id)
+          optionsAttributes.push({ id: obj.id, option: fields[idx].option });
+        else optionsAttributes.push({ ...obj, _destroy: obj.id });
       });
 
-      if (answers.length < options.length)
-        answersAttributes.push(...options.slice(answers.length));
-      const isPresent = answersAttributes.findIndex(
-        element => element.answer == correctAnswer && !element._destroy
+      if (options.length < fields.length)
+        optionsAttributes.push(...fields.slice(options.length));
+      const isPresent = optionsAttributes.findIndex(
+        element => element.option == correctAnswer && !element._destroy
       );
 
       if (isPresent == -1) {
-        setCorrectAnswer(answersAttributes[0].answer);
+        setCorrectAnswer(optionsAttributes[0].option);
       }
 
       await questionsApi.update(id, {
         question: {
           question,
           correct_answer:
-            isPresent != -1 ? correctAnswer : answersAttributes[0].answer,
+            isPresent != -1 ? correctAnswer : optionsAttributes[0].option,
           quiz_id: quizId,
-          answers_attributes: answersAttributes,
+          options_attributes: optionsAttributes,
         },
       });
       setLoading(false);
@@ -99,10 +99,10 @@ const EditQuestion = ({ history }) => {
     <Container>
       <QuestionForm
         question={question}
-        options={options}
+        fields={fields}
         loading={loading}
         defaultValue={defaultValue}
-        setOptions={setOptions}
+        setFields={setFields}
         setQuestion={setQuestion}
         handleSubmit={handleSubmit}
         setCorrectAnswer={setCorrectAnswer}

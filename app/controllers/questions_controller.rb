@@ -23,8 +23,8 @@ class QuestionsController < ApplicationController
 
   def show
     render status: :ok, json: { question: @question.as_json(include: {
-      answers: {
-        only: [:answer, :id]
+      options: {
+        only: [:option, :id]
       }
     })}
   end
@@ -50,7 +50,7 @@ class QuestionsController < ApplicationController
   private
 
     def question_params
-      params.require(:question).permit(:question, :correct_answer, :quiz_id, :options_attributes => [:id, :option])
+      params.require(:question).permit(:question, :correct_answer, :quiz_id, :options_attributes => [:id, :option, :_destroy])
     end
 
     def load_question

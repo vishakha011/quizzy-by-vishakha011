@@ -8,7 +8,7 @@ const Input = ({
   onChange,
   placeholder,
   required = true,
-  setOptions,
+  setFields,
   deleteOption = false,
 }) => {
   return (
@@ -43,7 +43,7 @@ const Input = ({
             <i
               className="ml-8 ri-subtract-line text-red-500 hover: shadow cursor-pointer"
               onClick={() =>
-                setOptions(prevState =>
+                setFields(prevState =>
                   prevState.slice(0, prevState.length - 1)
                 )
               }

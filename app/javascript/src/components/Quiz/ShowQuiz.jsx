@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
-
+import { isNil, isEmpty, either } from "ramda";
 import Container from "components/Container";
 import PrimaryContainer from "components/PrimaryContainer";
 import PageLoader from "components/PageLoader";
@@ -69,24 +69,18 @@ const ShowQuiz = () => {
         </div>
       </div>
 
-      {either(isNil, isEmpty)(questions) ? (
-        <h1 className="text-xl leading-5 text-center">
-          There are no questions in this quiz😔
-        </h1>
-      ) : (
-        questions.map((obj, key) => (
-          <ListQuestions
-            question={obj.question}
-            answers={obj.answers}
-            key={key}
-            handleDeleteQuestion={handleDeleteQuestion}
-          />
-        ))
-      )}
-      {/* <PrimaryContainer
+      <PrimaryContainer
         heading="There are no questions in this quiz"
         data={questions}
-      /> */}
+      />
+      {questions.map((obj, key) => (
+        <ListQuestions
+          question={obj.question}
+          options={obj.options}
+          key={key}
+          handleDeleteQuestion={handleDeleteQuestion}
+        />
+      ))}
     </Container>
   );
 };
