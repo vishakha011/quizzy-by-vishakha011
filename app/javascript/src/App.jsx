@@ -13,6 +13,7 @@ import CreateQuiz from "components/Quiz/CreateQuiz";
 import EditQuiz from "components/Quiz/EditQuiz";
 import ShowQuiz from "components/Quiz/ShowQuiz";
 import CreateQuestion from "components/Questions/CreateQuestion";
+import EditQuestion from "components/Questions/EditQuestion";
 import authApi from "apis/auth";
 
 const App = () => {
@@ -57,11 +58,8 @@ const App = () => {
         <Route exact path="/quiz/create" component={CreateQuiz} />
         <Route exact path="/quiz/:id/edit" component={EditQuiz} />
         <Route exact path="/quiz/:id/show" component={ShowQuiz} />
-        <Route
-          exact
-          path="/quiz/create/question/:id"
-          component={CreateQuestion}
-        />
+        <Route exact path="/question/:id/create" component={CreateQuestion} />
+        <Route exact path="/question/:id/edit" component={EditQuestion} />
         <PrivateRoute
           path="/"
           redirectRoute="/login"

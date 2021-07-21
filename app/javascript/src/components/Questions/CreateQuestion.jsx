@@ -7,7 +7,7 @@ import questionsApi from "apis/questions";
 
 const CreateQuestion = ({ history }) => {
   const [question, setQuestion] = useState("");
-  const [options, setOptions] = useState([
+  const [fields, setFields] = useState([
     { option: "", deleteOption: false },
     { option: "", deleteOption: false },
   ]);
@@ -20,9 +20,7 @@ const CreateQuestion = ({ history }) => {
     try {
       setLoading(true);
       let optionsAttributes = [];
-      options.map(option =>
-        optionsAttributes.push({ option: option.option })
-      );
+      fields.map(field => optionsAttributes.push({ option: field.option }));
       await questionsApi.create({
         question: {
           question,
@@ -32,8 +30,9 @@ const CreateQuestion = ({ history }) => {
         },
       });
       setLoading(false);
+      history.push(`/quiz/${id}/show`);
     } catch (error) {
-      Logger.error(error);
+      logger.error(error);
       setLoading(false);
     }
   };
@@ -44,8 +43,8 @@ const CreateQuestion = ({ history }) => {
         question={question}
         setQuestion={setQuestion}
         setCorrectAnswer={setCorrectAnswer}
-        options={options}
-        setOptions={setOptions}
+        fields={fields}
+        setFields={setFields}
         loading={loading}
         handleSubmit={handleSubmit}
       />

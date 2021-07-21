@@ -8,20 +8,21 @@ const QuestionForm = ({
   question,
   setQuestion,
   setCorrectAnswer,
-  options,
-  setOptions,
+  fields,
+  setFields,
   loading,
+  defaultValue = 0,
   handleSubmit,
 }) => {
   const handleSetOptions = (event, index) => {
     event.preventDefault();
-    const data = [...options];
+    const data = [...fields];
     data[index].option = event.target.value;
-    setOptions(data);
+    setFields(data);
   };
 
   const selectCorrectAnswer = [];
-  options.forEach((option, index) =>
+  fields.forEach((field, index) =>
     selectCorrectAnswer.push({
       value: index,
       label: `Option ${index + 1}`,
@@ -29,8 +30,8 @@ const QuestionForm = ({
   );
 
   const defaultOption = {
-    value: 0,
-    label: "Option 1",
+    value: defaultValue,
+    label: `Option ${defaultValue + 1}`,
   };
 
   return (
@@ -40,26 +41,26 @@ const QuestionForm = ({
         value={question}
         onChange={e => setQuestion(e.target.value)}
       />
-      {options.map((option, index) => (
+      {fields.map((field, index) => (
         <>
           <Input
             label={`Option ${index + 1}`}
-            value={option.option}
-            deleteOption={option.deleteOption}
+            value={field.option}
+            deleteOption={field.deleteOption}
             onChange={e => handleSetOptions(e, index)}
-            setOptions={setOptions}
+            setFields={setFields}
           />
         </>
       ))}
 
-      {options.length < 4 && (
+      {fields.length < 4 && (
         <div className="md:flex md:items-center mt-6">
           <div className="md:w-1/3"></div>
           <div className="md:w-2/3">
             <p
               className="text-blue-500 underline cursor-pointer"
               onClick={() =>
-                setOptions(prevState => [
+                setFields(prevState => [
                   ...prevState,
                   { option: "", deleteOption: true },
                 ])
@@ -79,7 +80,7 @@ const QuestionForm = ({
           <Select
             options={selectCorrectAnswer}
             defaultValue={defaultOption}
-            onChange={e => setCorrectAnswer(options[e.value].option)}
+            onChange={e => setCorrectAnswer(fields[e.value].option)}
             isSearchable
           />
         </div>
