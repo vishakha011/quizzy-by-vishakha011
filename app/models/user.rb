@@ -4,9 +4,11 @@ class User < ApplicationRecord
   enum role: {standard: 0, administrator: 1}
 
   has_many :quizzes, dependent: :destroy, foreign_key: :user_id
-
+  
   has_secure_password
 
+  
+  validates :role, inclusion: {in: roles.keys, message: :invalid }
   validates :first_name, presence: true, length: {maximum: 50}
   validates :last_name, presence: true, length: {maximum: 50}
   validates :email, presence: true,

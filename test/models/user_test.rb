@@ -83,7 +83,10 @@ class UserTest < ActiveSupport::TestCase
   end
 
   def test_user_should_have_valid_role
-    unless @user.role = 1 || @user.role = 0
+    valid_roles = [0, 1]
+  
+    valid_roles.each do |role|
+      @user.role = role
       assert @user.valid?
     end
   end
@@ -105,13 +108,22 @@ class UserTest < ActiveSupport::TestCase
   def test_user_should_not_be_saved_without_password_matching_confirm_password
     @user.password = "123456"
     assert_not @user.save
-    assert_equal ["Password confirmation doesn't match Password", "Password confirmation doesn't match Password"], @user.errors.full_messages
+    assert_equal ["Password confirmation doesn't match Password"], @user.errors.full_messages
   end
 
   def test_user_should_not_be_saved_without_valid_password_length
     @user.password = "123"
     assert_not @user.save
-    assert_equal ["Password confirmation doesn't match Password", "Password confirmation doesn't match Password", "Password is too short (minimum is 6 characters)"], @user.errors.full_messages
+    assert_equal ["Password confirmation doesn't match Password", "Password is too short (minimum is 6 characters)"], @user.errors.full_messages
+  end
+
+  def test_validation_should_reject_invalid_role
+    invalid_roles = [2, 3, 4]
+  
+    invalid_roles.each do |role|
+      @user.role = role
+      assert @user.invalid?
+    end
   end
 
 end
