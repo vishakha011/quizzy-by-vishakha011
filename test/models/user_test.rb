@@ -84,8 +84,20 @@ class UserTest < ActiveSupport::TestCase
 
 
   def test_user_should_have_valid_role
-    unless @user.role = 1 || @user.role = 0
+    valid_roles = [0, 1]
+  
+    valid_roles.each do |role|
+      @user.role = role
       assert @user.valid?
+    end
+  end
+
+  def test_validation_should_reject_invalid_role
+    invalid_roles = [2, 3, 4]
+  
+    invalid_roles.each do |role|
+      @user.role = role
+      assert @user.invalid?
     end
   end
 
