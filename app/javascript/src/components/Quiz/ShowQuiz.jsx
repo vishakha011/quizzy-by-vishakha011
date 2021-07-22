@@ -86,7 +86,7 @@ const ShowQuiz = () => {
           <i className="ri-checkbox-circle-fill px-1"></i>
           <span className="pr-1">Published, your public link is -</span>
           <a
-            href={`${window.location.origin}/public/${quiz.slug}`}
+            href={`${window.location.origin}/public/${quiz.slug}/attempt/new`}
             className="text-indigo-500"
             target="_blank"
             rel="noreferrer"
