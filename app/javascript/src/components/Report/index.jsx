@@ -4,7 +4,6 @@ import { isNil, isEmpty, either } from "ramda";
 import Container from "components/Container";
 import Table from "./Table";
 import PageLoader from "components/PageLoader";
-import PrimaryContainer from "components/PrimaryContainer";
 import Button from "components/Button";
 import reportApi from "apis/report";
 
@@ -36,12 +35,14 @@ const Report = () => {
     <Container>
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-bold text-gray-700">Reports</h1>
-        <Button buttonText="Download" iconClass="ri-download-2-line" />
+        <Button
+          type="link"
+          buttonText="Download"
+          iconClass="ri-download-2-line"
+          path="/reports/downloads"
+        />
       </div>
-      {/* <PrimaryContainer
-        heading="No reports to show"
-        data={reports}
-      /> */}
+
       {either(isNil, isEmpty)(reports) ? (
         <h1 className="text-lg leading-5 text-gray-500 text-center mt-48">
           No reports to show

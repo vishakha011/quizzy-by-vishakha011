@@ -17,6 +17,7 @@ import EditQuestion from "components/Questions/EditQuestion";
 import AssessmentLogin from "components/Public/AssessmentLogin";
 import AssessmentResult from "components/Public/AssessmentResult";
 import Report from "components/Report";
+import DownloadReport from "components/Report/DownloadReport";
 import authApi from "apis/auth";
 
 const App = () => {
@@ -64,6 +65,7 @@ const App = () => {
         <Route exact path="/question/:id/create" component={CreateQuestion} />
         <Route exact path="/question/:id/edit" component={EditQuestion} />
         <Route exact path="/reports" component={Report} />
+        <Route exact path="/reports/downloads" component={DownloadReport} />
 
         <Route
           exact
@@ -75,6 +77,7 @@ const App = () => {
           path="/public/:slug/result/:id"
           component={AssessmentResult}
         />
+
         <PrivateRoute
           path="/"
           redirectRoute="/login"
