@@ -24,18 +24,21 @@ const LoginForm = ({
             label="First Name"
             type="text"
             placeholder="Eve"
+            value={firstName}
             onChange={e => setFirstName(e.target.value)}
           />
           <Input
             label="Last Name"
             type="text"
             placeholder="Smith"
+            value={lastName}
             onChange={e => setLastName(e.target.value)}
           />
           <Input
             label="Email"
             type="email"
             placeholder="eve@example.com"
+            value={email}
             onChange={e => setEmail(e.target.value)}
           />
 

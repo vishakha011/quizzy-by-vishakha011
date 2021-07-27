@@ -15,6 +15,7 @@ import ShowQuiz from "components/Quiz/ShowQuiz";
 import CreateQuestion from "components/Questions/CreateQuestion";
 import EditQuestion from "components/Questions/EditQuestion";
 import AssessmentLogin from "components/Public/AssessmentLogin";
+import AssessmentResult from "components/Public/AssessmentResult";
 import authApi from "apis/auth";
 
 const App = () => {
@@ -66,6 +67,11 @@ const App = () => {
           exact
           path="/public/:slug/attempt/new"
           component={AssessmentLogin}
+        />
+        <Route
+          exact
+          path="/public/:slug/result/:id"
+          component={AssessmentResult}
         />
         <PrivateRoute
           path="/"
