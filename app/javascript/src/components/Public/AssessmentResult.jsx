@@ -18,7 +18,6 @@ const AssessmentResult = () => {
         user: { id },
       });
       setQuiz(response.data);
-      // logger.info(response)
     } catch (error) {
       logger.error(error);
     } finally {
