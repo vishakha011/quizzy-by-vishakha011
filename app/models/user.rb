@@ -4,7 +4,8 @@ class User < ApplicationRecord
   enum role: {standard: 0, administrator: 1}
 
   has_many :quizzes, dependent: :destroy, foreign_key: :user_id
-  
+  has_many :attempts, dependent: :destroy
+
   has_secure_password
 
   

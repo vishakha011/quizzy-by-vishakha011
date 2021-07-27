@@ -2,6 +2,8 @@ class Quiz < ApplicationRecord
   belongs_to :user
 
   has_many :questions, dependent: :destroy, foreign_key: :quiz_id
+  has_many :attempts, dependent: :destroy
+
   validates :name, presence: true, length: {maximum: 50}  
   validates :slug, uniqueness: true
   validate :slug_not_changed

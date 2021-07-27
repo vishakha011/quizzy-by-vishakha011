@@ -1,5 +1,7 @@
 class SessionsController < ApplicationController
-
+  skip_before_action :check_current_user, only: [:create, :show]
+  skip_before_action :check_current_user_is_admin
+  
   def create
     user = User.find_by(email: login_params[:email].downcase)
     if user.present? && user.authenticate(login_params[:password])
