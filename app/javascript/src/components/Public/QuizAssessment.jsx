@@ -13,7 +13,7 @@ const QuizAssessment = ({
   submitted,
   setSubmitted,
   userId,
-  history,
+  history
 }) => {
   const [quiz, setQuiz] = useState({});
   const [options, setOptions] = useState([]);
@@ -38,11 +38,11 @@ const QuizAssessment = ({
         assessment: {
           quiz_id: quiz.quiz.id,
           user_id: userId,
-          submitted: submitted,
+          submitted: true,
           correct_answers: correctAnswers,
           wrong_answers: wrongAnswers,
-          attempt_answers_attributes: options,
-        },
+          attempt_answers_attributes: options
+        }
       });
       history.push(`/public/${slug}/result/${userId}`);
     } catch (error) {
@@ -76,7 +76,7 @@ const QuizAssessment = ({
   };
 
   useEffect(() => {
-    if (!attempted && !submitted) fetchQuiz();
+    if (!attempted) fetchQuiz();
   }, []);
 
   if (loading) {
@@ -87,10 +87,10 @@ const QuizAssessment = ({
     );
   }
 
-  if (attempted && submitted) {
+  if (attempted) {
     return (
       <div className="h-screen">
-        <div className="flex flex-col items-center justify-center w-screen h-screen">
+        <div className="flex flex-col items-center justify-center mt-32">
           <h1 className="text-lg leading-5">
             You have already attempted this quiz!!
           </h1>
