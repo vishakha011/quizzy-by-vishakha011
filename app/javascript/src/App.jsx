@@ -29,7 +29,6 @@ const App = () => {
     try {
       const response = await authApi.isLoggedIn();
       const { loggedIn, userId, userName, userEmail } = response.data;
-      logger.info(response);
       setIsLoggedIn(loggedIn);
       setUser({ userId, userName, userEmail });
     } catch (error) {

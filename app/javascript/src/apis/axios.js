@@ -6,7 +6,7 @@ axios.defaults.baseURL = "/";
 export const setAuthHeaders = (setLoading = () => null) => {
   axios.defaults.headers = {
     Accept: "application/json",
-    "Content-Type": "application/json",
+    "Content-Type": "application/json"
   };
 
   setLoading(false);
