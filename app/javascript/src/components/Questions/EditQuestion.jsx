@@ -22,7 +22,6 @@ const EditQuestion = ({ history }) => {
       const { question, options, correct_answer, quiz_id } =
         response.data.question;
       setQuestion(question);
-      setCorrectAnswer(correct_answer);
       setQuizId(quiz_id);
       setFields(() => {
         options.map((obj, idx) => {
@@ -30,6 +29,7 @@ const EditQuestion = ({ history }) => {
         });
         return options;
       });
+      setCorrectAnswer(correct_answer);
       setDefaultValue(() => {
         let indexOfCorrectAnswer;
         options.map((obj, idx) => {
@@ -79,7 +79,7 @@ const EditQuestion = ({ history }) => {
         },
       });
       setLoading(false);
-      history.push(`/quiz/${id}/show`);
+      history.push(`/quiz/${quizId}/show`);
     } catch (error) {
       logger.error(error);
       setLoading(false);

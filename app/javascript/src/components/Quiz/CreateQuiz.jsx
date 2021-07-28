@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Container from "components/Container";
 import QuizForm from "components/Quiz/Form/QuizForm";
 import quizApi from "apis/quiz";

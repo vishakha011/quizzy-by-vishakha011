@@ -2,8 +2,20 @@ import React from "react";
 
 import NavItem from "./NavItem";
 import { Link } from "react-router-dom";
+import Toastr from "components/Common/Toastr";
+import authApi from "apis/auth";
 
 const NavBar = ({ isLoggedIn, user }) => {
+  const handleLogout = async () => {
+    try {
+      await authApi.logout();
+      Toastr.success("Logged out successfully.");
+      window.location.href = "/";
+    } catch (error) {
+      logger.error(error);
+    }
+  };
+
   return (
     <nav className="bg-white shadow">
       <div className="container px-2 mx-auto max-w-7xl sm:px-4 lg:px-8">
@@ -25,12 +37,13 @@ const NavBar = ({ isLoggedIn, user }) => {
               </Link>
               <span
                 className="inline-flex items-center px-6 pt-1 text-base font-regular leading-5 text-bb-gray-600
-            text-opacity-50 transition duration-150 ease-in-out border-b-2 border-transparent focus:outline-none
+            text-opacity-50 transition duration-150 ease-in-out border-b-2 border-transparent hover:text-bb-gray-600 focus:outline-none
             focus:text-bb-gray-700"
               >
                 {user.userName}
               </span>
               <a
+                onClick={handleLogout}
                 className="inline-flex items-center px-6 pt-1 text-base
            font-semibold leading-5 text-bb-gray-600 text-opacity-50
            transition duration-150 ease-in-out border-b-2

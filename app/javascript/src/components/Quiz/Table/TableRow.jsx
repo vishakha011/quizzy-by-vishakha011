@@ -9,7 +9,7 @@ const TableRow = ({
   showQuiz,
   editQuiz,
   setOpenModal,
-  setId,
+  setId
 }) => {
   return (
     <tbody
@@ -70,8 +70,9 @@ const TableRow = ({
 
 TableRow.propTypes = {
   data: PropTypes.array.isRequired,
-  destroyTask: PropTypes.func,
-  updateTask: PropTypes.func,
+  showQuiz: PropTypes.func,
+  editQuiz: PropTypes.func,
+  setOpenModal: PropTypes.func
 };
 
 export default TableRow;
