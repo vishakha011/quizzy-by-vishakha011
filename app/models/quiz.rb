@@ -9,6 +9,8 @@ class Quiz < ApplicationRecord
   validate :slug_not_changed
 
   before_create :set_slug
+  after_create :log_quiz_details
+
 
   private
 
@@ -26,6 +28,10 @@ class Quiz < ApplicationRecord
       if slug_changed? && self.persisted?
         errors.add(:slug, 'is immutable!')
       end
+    end
+
+    def log_quiz_details
+      QuizLoggerJob.perform_later(self)
     end
 
 end
