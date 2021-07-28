@@ -1,9 +1,12 @@
-# require "minitest/autorun"
+# frozen_string_literal: true
+
 require "test_helper"
 
 class UserTest < ActiveSupport::TestCase
   def setup
-    @user = User.new(first_name: "Sam", last_name: "Smith", email: "sam@example.com", role: 1, password: "welcome", password_confirmation: "welcome")
+    @user = User.new(
+      first_name: "Sam", last_name: "Smith", email: "sam@example.com", role: 1, password: "welcome",
+      password_confirmation: "welcome")
   end
 
   def test_user_should_be_valid
@@ -11,29 +14,29 @@ class UserTest < ActiveSupport::TestCase
   end
 
   def test_user_should_be_invalid_without_first_name
-    @user.first_name = ''
+    @user.first_name = ""
     assert_not @user.valid?
     assert_equal ["First name can't be blank"], @user.errors.full_messages
   end
 
   def test_user_should_be_invalid_without_last_name
-    @user.last_name = ''
+    @user.last_name = ""
     assert_not @user.valid?
     assert_equal ["Last name can't be blank"], @user.errors.full_messages
   end
 
   def test_first_name_should_be_of_valid_length
-    @user.first_name = 'a' * 50
+    @user.first_name = "a" * 50
     assert @user.valid?
   end
 
   def test_last_name_should_be_of_valid_length
-    @user.last_name = 'a' * 50
+    @user.last_name = "a" * 50
     assert @user.valid?
   end
 
   def test_user_should_not_be_valid_and_saved_without_email
-    @user.email = ''
+    @user.email = ""
     assert_not @user.valid?
 
     @user.save
@@ -42,11 +45,11 @@ class UserTest < ActiveSupport::TestCase
 
   def test_user_should_not_be_valid_and_saved_if_email_not_unique
     @user.save!
-  
+
     test_user = @user.dup
     assert_not test_user.valid?
-  
-    assert_equal ['Email has already been taken'],
+
+    assert_equal ["Email has already been taken"],
                   test_user.errors.full_messages
   end
 
@@ -58,24 +61,24 @@ class UserTest < ActiveSupport::TestCase
   end
 
   def test_reject_email_of_invalid_length
-    @user.email = ('a' * 50) + '@test.com'
+    @user.email = ("a" * 50) + "@test.com"
     assert @user.invalid?
   end
 
   def test_validation_should_accept_valid_addresses
     valid_emails = %w[user@example.com USER@example.COM US-ER@example.org
                       first.last@example.in user+one@example.ac.in]
-  
+
     valid_emails.each do |email|
       @user.email = email
       assert @user.valid?
     end
   end
-  
+
   def test_validation_should_reject_invalid_addresses
     invalid_emails = %w[user@example,com user_at_example.org user.name@example.
                         @sam-sam.com sam@sam+exam.com fishy+#.com]
-  
+
     invalid_emails.each do |email|
       @user.email = email
       assert @user.invalid?
@@ -84,7 +87,7 @@ class UserTest < ActiveSupport::TestCase
 
   def test_user_should_have_valid_role
     valid_roles = [0, 1]
-  
+
     valid_roles.each do |role|
       @user.role = role
       assert @user.valid?
@@ -114,16 +117,17 @@ class UserTest < ActiveSupport::TestCase
   def test_user_should_not_be_saved_without_valid_password_length
     @user.password = "123"
     assert_not @user.save
-    assert_equal ["Password confirmation doesn't match Password", "Password is too short (minimum is 6 characters)"], @user.errors.full_messages
+    assert_equal ["Password confirmation doesn't match Password", "Password is too short (minimum is 6 characters)"],
+@user.errors.full_messages
   end
 
   def test_validation_should_reject_invalid_role
     invalid_roles = [2, 3, 4]
-  
+
     invalid_roles.each do |role|
       @user.role = role
       assert @user.invalid?
     end
   end
-
 end
+
