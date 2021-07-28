@@ -14,13 +14,6 @@ const QuestionForm = ({
   defaultValue = 0,
   handleSubmit,
 }) => {
-  const handleSetOptions = (event, index) => {
-    event.preventDefault();
-    const data = [...fields];
-    data[index].option = event.target.value;
-    setFields(data);
-  };
-
   const selectCorrectAnswer = [];
   fields.forEach((field, index) =>
     selectCorrectAnswer.push({
@@ -34,6 +27,15 @@ const QuestionForm = ({
     label: `Option ${defaultValue + 1}`,
   };
 
+  const handleSetOptions = (value, idx) => {
+    setFields(preState => {
+      const curState = [...preState];
+      curState[idx].option = value;
+      setCorrectAnswer(curState[0].option);
+      return curState;
+    });
+  };
+
   return (
     <form className="max-w-lg mt-12" onSubmit={handleSubmit}>
       <Input
@@ -44,10 +46,11 @@ const QuestionForm = ({
       {fields.map((field, index) => (
         <>
           <Input
+            key={index}
             label={`Option ${index + 1}`}
             value={field.option}
             deleteOption={field.deleteOption}
-            onChange={e => handleSetOptions(e, index)}
+            onChange={e => handleSetOptions(e.target.value, index)}
             setFields={setFields}
           />
         </>
@@ -89,7 +92,7 @@ const QuestionForm = ({
       <div className="md:flex md:items-center">
         <div className="md:w-1/3"></div>
         <div>
-          <Button type="submit" buttonText={"Submit"} loading={loading} />
+          <Button type="submit" buttonText="Submit" loading={loading} />
         </div>
       </div>
     </form>
