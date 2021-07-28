@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_23_075230) do
+ActiveRecord::Schema.define(version: 2021_07_28_041409) do
 
   create_table "attempt_answers", force: :cascade do |t|
     t.integer "attempt_id", null: false
@@ -35,6 +35,13 @@ ActiveRecord::Schema.define(version: 2021_07_23_075230) do
     t.index ["user_id"], name: "index_attempts_on_user_id"
   end
 
+  create_table "logs", force: :cascade do |t|
+    t.integer "quiz_id"
+    t.text "messgae"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "options", force: :cascade do |t|
     t.string "option"
     t.datetime "created_at", precision: 6, null: false
@@ -55,7 +62,7 @@ ActiveRecord::Schema.define(version: 2021_07_23_075230) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
-    t.string "slug", null: false
+    t.string "slug"
     t.boolean "is_published", default: false, null: false
     t.index ["slug"], name: "index_quizzes_on_slug", unique: true
   end

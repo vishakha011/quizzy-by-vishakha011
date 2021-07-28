@@ -11,4 +11,12 @@ class ReportController < ApplicationController
     })
   }
   end
+
+  def create_csv
+    reports = Attempt.all.order("created_at desc")
+    respond_to do |format|
+      format.html
+      format.csv { send_data reports.to_csv, filename: "report.csv" }
+    end
+  end
 end
