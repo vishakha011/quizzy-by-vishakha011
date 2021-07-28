@@ -20,7 +20,7 @@ const LoginForm = ({ handleSubmit, setEmail, setPassword, loading }) => {
           <Input
             label="Email"
             type="email"
-            placeholder="oliver@example.com"
+            placeholder="sam@example.com"
             onChange={e => setEmail(e.target.value)}
           />
           <Input
@@ -30,7 +30,12 @@ const LoginForm = ({ handleSubmit, setEmail, setPassword, loading }) => {
             onChange={e => setPassword(e.target.value)}
           />
 
-          <Button type="submit" buttonText="Sign In" loading={loading} />
+          <div className="md:flex md:items-center">
+            <div className="md:w-1/3"></div>
+            <div className="md:w-2/3">
+              <Button type="submit" buttonText="Sign In" loading={loading} />
+            </div>
+          </div>
         </form>
       </div>
     </div>
