@@ -1,5 +1,6 @@
 class QuizController < ApplicationController
-  before_action :load_quiz, only: %i[show update destroy]
+  before_action :load_quiz, only: %i[show update destroy publish]
+  before_action :add_slug, only: [:publish]
 
   def index
     quizzes = Quiz.all
@@ -22,7 +23,7 @@ class QuizController < ApplicationController
         question: question,
         options: question.options
       }
-    end 
+    end
     render status: :ok, json: { quiz: @quiz, questions: @questions.as_json }
   end
 
@@ -44,6 +45,10 @@ class QuizController < ApplicationController
     end
   end
 
+  def publish
+    render status: :ok, json: { quiz: @quiz }
+  end
+
   private
   def quiz_params
     params.require(:quiz).permit(:name, :is_published).merge(user_id: @current_user.id)
@@ -53,5 +58,10 @@ class QuizController < ApplicationController
     @quiz = Quiz.find(params[:id])
     rescue ActiveRecord::RecordNotFound => e
       render json: { errors: e }, status: :not_found
+  end
+
+  def add_slug
+    slug = Quiz.get_slug(@quiz.name)
+    @quiz.update(slug: slug)
   end
 end

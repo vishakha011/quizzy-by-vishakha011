@@ -34,6 +34,7 @@ const ShowQuiz = () => {
       await quizApi.update(id, {
         quiz: { name: quiz.name, is_published: publish },
       });
+      await quizApi.publish(id);
       setPageLoading(true);
       fetchQuizDetails();
     } catch (error) {
